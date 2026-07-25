@@ -55,5 +55,18 @@ stellar contract deploy --wasm ./target/wasm/live_poll.wasm --source deployer --
 ---
 
 ## 📸 Screenshots & Verification
-- **Wallet Options**: Supported wallets are automatically detected and displayed upon clicking "Connect Wallet".
-- **Explorer Verification**: All votes and contract calls emit verifiable transaction hashes on the Stellar Testnet Explorer.
+
+### Wallet Options
+
+After clicking **Connect Wallet**, the app surfaces a wallet picker powered by `@creit.tech/stellar-wallets-kit`. The picker automatically detects which of the supported wallets are installed in the user's browser and lets them sign in with one click.
+
+![Supported wallet options](./docs/wallet-options.svg)
+
+> ℹ️ The image above is a **stylized representation** of the picker UI. To capture a real screenshot of your session, run `npm run dev` from `web/`, click **Connect Wallet**, and replace `docs/wallet-options.svg` with the resulting capture.
+
+### Explorer Verification
+
+All votes and contract calls emit verifiable transaction hashes on the Stellar Testnet Explorer. The example hash below corresponds to a real on-chain `vote` call against the deployed contract:
+
+- [`c262d1a8852a348c12b7e9f40cd3a4c03ff5e795ba561b66b0f5e2f389972c8b`](https://stellar.expert/explorer/testnet/tx/c262d1a8852a348c12b7e9f40cd3a4c03ff5e795ba561b66b0f5e2f389972c8b)
+- Contract: [`CDPZIOJ5L4VJWAJ4NQ2G4FEQHEGDECJVY5YIN5IDWDOYS5252EHECGPT`](https://stellar.expert/explorer/testnet/contract/CDPZIOJ5L4VJWAJ4NQ2G4FEQHEGDECJVY5YIN5IDWDOYS5252EHECGPT)
