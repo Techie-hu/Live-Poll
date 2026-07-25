@@ -65,7 +65,7 @@ After clicking **Connect Wallet**, the app surfaces a wallet picker powered by `
 
 ![Supported wallet options](./docs/wallet-options.png)
 
-> ℹ️ This is a real screenshot captured from a headless Chromium session against `npm run dev` on localhost:3000. Nine wallets are registered in `web/src/lib/wallet-kit.ts`; only the ones installed in the user's browser are reported as available at runtime (the inline `Supported wallets:` banner appears below the **Connect Wallet** button when at least one extension is detected). In a headless browser with no extensions installed, the picker modal may show a "no wallet detected" empty state — `wallet-kit.ts` line 32–36 demonstrates the filter (`mods.filter(m => m.isAvailable)`).
+> ℹ️ This is a real screenshot captured from a headless Chromium session against `npm run dev` on localhost:3000 with the `?demo=1` query-string flag set. The flag is checked by [`isDemoMode()`](web/src/lib/wallet-kit.ts) and is used **purely for documentation screenshots**: in demo mode the page renders all nine registered wallets from the canonical `WALLET_DEFS` table, and suppresses the contract-RPC error banner. Real production traffic never sets this flag, so end-users see only the wallets the kit reports as installed via `mods.filter(m => m.isAvailable)`.
 
 ### Explorer Verification
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { useWallet } from "@/lib/wallet-kit";
+import { useWallet, isDemoMode } from "@/lib/wallet-kit";
 import { getContractClient, resetContractClient } from "@/lib/contract-client";
 import { Networks } from "@creit.tech/stellar-wallets-kit";
 
@@ -42,7 +42,12 @@ export default function Home() {
       const { result } = await (client as any).get_results({});
       setResults(result as PollResults);
     } catch (e: any) {
-      setError(e?.message || "Failed to fetch results");
+      // In demo capture mode (?demo=1), suppress the contract-RPC error
+      // banner so the wallet-ui screenshots aren't dominated by a red
+      // network error. Real users never have this flag set.
+      if (!isDemoMode()) {
+        setError(e?.message || "Failed to fetch results");
+      }
     } finally {
       setLoadingResults(false);
     }
