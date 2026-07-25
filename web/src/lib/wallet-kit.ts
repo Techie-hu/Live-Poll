@@ -33,8 +33,15 @@ const WALLET_DEFS = [
   { id: "bitget", name: "Bitget", mod: BitgetModule },
 ] as const;
 
-const DEFAULT_MODULES: Array<any> =
-  typeof window !== "undefined" ? WALLET_DEFS.map((d) => new d.mod()) : [];
+// Each module entry is a class; InstanceType turns it into the runtime
+// instance type. Used to give DEFAULT_MODULES a precise element type
+// without falling back to `any`.
+type WalletModule = InstanceType<(typeof WALLET_DEFS)[number]["mod"]>;
+
+const DEFAULT_MODULES: WalletModule[] =
+  typeof window !== "undefined"
+    ? WALLET_DEFS.map((d) => new d.mod())
+    : [];
 
 let isInitialized = false;
 
@@ -52,11 +59,7 @@ let isInitialized = false;
  */
 export function isDemoMode(): boolean {
   if (typeof window === "undefined") return false;
-  try {
-    return new URLSearchParams(window.location.search).get("demo") === "1";
-  } catch {
-    return false;
-  }
+  return new URLSearchParams(window.location.search).get("demo") === "1";
 }
 
 export function initWalletKit() {
