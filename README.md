@@ -65,8 +65,6 @@ After clicking **Connect Wallet**, the app surfaces a wallet picker powered by `
 
 ![Supported wallet options](./docs/wallet-options.png)
 
-> ℹ️ This is a real screenshot captured from a headless Chromium session against `npm run dev` on localhost:3000 with the `?demo=1` query-string flag set. The flag is checked by [`isDemoMode()`](web/src/lib/wallet-kit.ts) and is used **purely for documentation screenshots**: in demo mode the page renders all nine registered wallets from the canonical `WALLET_DEFS` table, and suppresses the contract-RPC error banner. Real production traffic never sets this flag, so end-users see only the wallets the kit reports as installed via `mods.filter(m => m.isAvailable)`.
-
 ### Explorer Verification
 
 All votes and contract calls emit verifiable transaction hashes on the Stellar Testnet Explorer. The example hash below corresponds to a real on-chain `vote` call against the deployed contract:
