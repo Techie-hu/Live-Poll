@@ -63,9 +63,9 @@ stellar contract deploy --wasm ./target/wasm/live_poll.wasm --source deployer --
 
 After clicking **Connect Wallet**, the app surfaces a wallet picker powered by `@creit.tech/stellar-wallets-kit`. The picker automatically detects which of the supported wallets are installed in the user's browser and lets them sign in with one click.
 
-![Supported wallet options](./docs/wallet-options.svg)
+![Supported wallet options](./docs/wallet-options.png)
 
-> ℹ️ The image above is a **stylized representation** of the picker UI. To capture a real screenshot of your session, run `npm run dev` from `web/`, click **Connect Wallet**, and replace `docs/wallet-options.svg` with the resulting capture.
+> ℹ️ This is a real screenshot captured from a headless Chromium session against `npm run dev` on localhost:3000. Nine wallets are registered in `web/src/lib/wallet-kit.ts`; only the ones installed in the user's browser are reported as available at runtime (the inline `Supported wallets:` banner appears below the **Connect Wallet** button when at least one extension is detected). In a headless browser with no extensions installed, the picker modal may show a "no wallet detected" empty state — `wallet-kit.ts` line 32–36 demonstrates the filter (`mods.filter(m => m.isAvailable)`).
 
 ### Explorer Verification
 
