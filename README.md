@@ -4,6 +4,10 @@ A decentralized, real-time single-question polling application built on the Stel
 
 ## 🚀 Live Demo & Deployed Resources
 
+- **Web App (Frontend)** — 🚧 _Not yet deployed._ The Next.js app builds cleanly (`next build` ✅) and is ready to host. Click below to one-click-deploy, then paste the resulting URL into this line:
+  - [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FTechie-hu%2FLive-Poll)
+  - [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https%3A%2F%2Fgithub.com%2FTechie-hu%2FLive-Poll#BASE=web&BUILD_COMMAND=npm+run+build&PUBLISH_DIRECTORY=.next)
+  - ⚠️ **Project root**: when prompted, set the project root to `web/` (Vercel/Netlify default sees it as the repo root — the Next.js app lives one level down).
 - **Contract Address**: `CDPZIOJ5L4VJWAJ4NQ2G4FEQHEGDECJVY5YIN5IDWDOYS5252EHECGPT`
 - **Example Transaction Hash**: `c262d1a8852a348c12b7e9f40cd3a4c03ff5e795ba561b66b0f5e2f389972c8b` ([View on Stellar Expert](https://stellar.expert/explorer/testnet/tx/c262d1a8852a348c12b7e9f40cd3a4c03ff5e795ba561b66b0f5e2f389972c8b))
 - **Network**: Stellar Testnet (`Test SDF Network ; September 2015`)
