@@ -38,10 +38,18 @@ const WALLET_DEFS = [
 // without falling back to `any`.
 type WalletModule = InstanceType<(typeof WALLET_DEFS)[number]["mod"]>;
 
-const DEFAULT_MODULES: WalletModule[] =
-  typeof window !== "undefined"
-    ? WALLET_DEFS.map((d) => new d.mod())
-    : [];
+// IMPORTANT: kept as a `let` and populated *lazily* inside `initWalletKit`.
+//
+// Instantiating the kit modules at module-eval time would run at the top of
+// the client bundle, *before* React hydration finishes. Some kit modules
+// inject CSS custom properties (e.g. `--swk-background`) into
+// `document.documentElement.style` synchronously in their constructor, which
+// would diverge from the server-rendered `<html>` and trigger a React
+// hydration mismatch warning — surfaced in dev mode as a corner error
+// overlay. By deferring instantiation until `initWalletKit()` is called
+// from a `useEffect`, the side-effect runs post-hydration and the DOM is
+// consistent.
+let DEFAULT_MODULES: WalletModule[] = [];
 
 let isInitialized = false;
 
@@ -65,6 +73,9 @@ export function isDemoMode(): boolean {
 export function initWalletKit() {
   if (typeof window === "undefined") return;
   if (!isInitialized) {
+    // Populate the module list lazily, here (post-hydration), instead of
+    // at top-level. See the comment above DEFAULT_MODULES.
+    DEFAULT_MODULES = WALLET_DEFS.map((d) => new d.mod());
     StellarWalletsKit.init({
       modules: DEFAULT_MODULES,
       network: Networks.TESTNET,
